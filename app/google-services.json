@@ -1,0 +1,56 @@
+{
+  "project_info": {
+    "project_number": "621941754304",
+    "firebase_url": "https://eyeson-55c1c.firebaseio.com",
+    "project_id": "eyeson-55c1c",
+    "storage_bucket": "eyeson-55c1c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:621941754304:android:62e0eb2bd374bb47",
+        "android_client_info": {
+          "package_name": "ersa97.raven.eyeson"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "621941754304-83cl4debki7co40nlavdap0029orrfc7.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "ersa97.raven.eyeson",
+            "certificate_hash": "8d6e61bad6bc0af46f5c719f2e302f839a594dc6"
+          }
+        },
+        {
+          "client_id": "621941754304-ardgvl1rhsvfdlld4ndlcormhnnan7qu.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "ersa97.raven.eyeson",
+            "certificate_hash": "bf7643d15ee3d7ec3962b2a12274af942ffc4c9f"
+          }
+        },
+        {
+          "client_id": "621941754304-3to6pon8tocc1jb090bfgpejvi6fk9vv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC1ny86rLN6nLwJg2Yd7USVDbT1guuLCyc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "621941754304-3to6pon8tocc1jb090bfgpejvi6fk9vv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/jadwal"
+        android:icon="@drawable/ic_grade"
+        android:title="jadwal"/>
+    <item
+        android:id="@+id/izin"
+        android:icon="@drawable/ic_izin"
+        android:title="izin"/>
+
+
+
+</menu>
