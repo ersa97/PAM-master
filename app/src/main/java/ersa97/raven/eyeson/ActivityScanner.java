@@ -75,4 +75,12 @@ public class ActivityScanner extends AppCompatActivity implements ZXingScannerVi
         startActivity(intent);
         finish();
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent intent = new Intent(ActivityScanner.this, IzinActivity.class);
+        startActivity(intent);
+        finish();
+    }
 }
