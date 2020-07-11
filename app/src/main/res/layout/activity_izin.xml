@@ -40,7 +40,7 @@
         app:layout_constraintBottom_toBottomOf="@id/txt_id"
         app:layout_constraintLeft_toRightOf="@id/txt_id"
         android:backgroundTint="@color/button2"
-        android:text="Verify"
+        android:text="scan id"
         android:textColor="@color/colorPrimaryDark"
         />
 
@@ -95,7 +95,7 @@
         />
 
     <Button
-        android:id="@+id/btn_sign_in"
+        android:id="@+id/btn_izin_scan"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -103,7 +103,7 @@
         app:layout_constraintTop_toBottomOf="@id/alasan"
         app:layout_constraintBottom_toBottomOf="parent"
         android:backgroundTint="@color/button2"
-        android:text="Sign"
+        android:text="Izin"
         android:textColor="@color/colorPrimaryDark"
         />
 
