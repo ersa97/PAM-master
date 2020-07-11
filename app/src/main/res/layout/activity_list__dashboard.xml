@@ -59,14 +59,4 @@
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/add_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_add_student"
-        android:layout_gravity="bottom|end"
-        android:layout_marginRight="25dp"
-        android:layout_marginBottom="25dp"
-        android:backgroundTint="@color/button2"/>
-
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

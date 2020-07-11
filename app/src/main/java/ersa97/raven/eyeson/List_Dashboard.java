@@ -39,7 +39,6 @@ public class List_Dashboard extends AppCompatActivity {
 
     private StudentsAdapter adapter;
 
-    FloatingActionButton fab;
 
     TextView textView;
     String email;
@@ -73,15 +72,6 @@ public class List_Dashboard extends AppCompatActivity {
 
 
 
-        fab = (FloatingActionButton) findViewById(R.id.add_btn);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivityForResult(new Intent(List_Dashboard.this,AddStudentActivity.class), ADD_STUDENT_CODE);
-
-            }
-        });
-
         recyclerView = findViewById(R.id.main_list);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -108,33 +98,6 @@ public class List_Dashboard extends AppCompatActivity {
         adapter = new StudentsAdapter(options);
 
         recyclerView.setAdapter(adapter);
-
-        new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0,
-                ItemTouchHelper.LEFT) {
-            @Override
-            public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder viewHolder1) {
-                return false;
-            }
-
-            @Override
-            public void onSwiped(@NonNull final RecyclerView.ViewHolder viewHolder, int i) {
-
-                new AlertDialog.Builder(viewHolder.itemView.getContext())
-                        .setMessage("Yakin?")
-                        .setPositiveButton("iya", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                int position = viewHolder.getAdapterPosition();
-                                adapter.deleteItem(position);
-                            }
-                        }).setNegativeButton("tidak", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        adapter.notifyItemChanged(viewHolder.getAdapterPosition());
-                    }
-                }).create().show();
-            }
-        }).attachToRecyclerView(recyclerView);
     }
 
     @Override
