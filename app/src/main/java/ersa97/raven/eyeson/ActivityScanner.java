@@ -28,7 +28,6 @@ public class ActivityScanner extends AppCompatActivity implements ZXingScannerVi
 
         mScannerView = findViewById(R.id.zxing_scan);
 
-        scanViewHandler();
     }
 
     private void scanViewHandler() {
@@ -65,6 +64,12 @@ public class ActivityScanner extends AppCompatActivity implements ZXingScannerVi
         super.onResume();
         mScannerView.setResultHandler(this);
         mScannerView.startCamera();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        scanViewHandler();
     }
 
     @Override

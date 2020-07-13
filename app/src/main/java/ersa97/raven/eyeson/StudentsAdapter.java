@@ -84,7 +84,6 @@ public class StudentsAdapter extends FirestoreRecyclerAdapter<Students, Students
                     intent.putExtra("izin", izin);
                     v.getContext().startActivity(intent);
 
-
                 }
             });
         }

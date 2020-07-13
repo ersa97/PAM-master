@@ -60,18 +60,18 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginHorizontal="@dimen/default_padding_margin"
+                android:layout_marginHorizontal="8dp"
                 android:layout_marginTop="140dp">
 
                 <TextView
                     android:id="@+id/textView_Name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/default_padding_margin"
+                    android:layout_margin="8dp"
                     android:gravity="center"
                     android:text="Santri Name"
                     android:textAlignment="center"
-                    android:textSize="@dimen/txt_title_detail"
+                    android:textSize="20dp"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -94,7 +94,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="8dp"
-                    android:text="Deskripsi: "
+                    android:text="Alasan"
                     android:textAllCaps="true"
                     android:textSize="16sp"
                     android:textStyle="bold"

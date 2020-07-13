@@ -100,6 +100,7 @@ String namaDoc;
         super.onBackPressed();
         Intent intent = new Intent(getApplicationContext(), List_Dashboard.class);
         startActivity(intent);
+        finish();
     }
 
 

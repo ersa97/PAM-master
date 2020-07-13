@@ -113,6 +113,7 @@ public class List_Dashboard extends AppCompatActivity {
             case R.id.go_to_account:
                 Intent intent = new Intent(List_Dashboard.this, AccountActivity.class);
                 startActivity(intent);
+                finish();
                 default:
                     return super.onOptionsItemSelected(item);
         }
@@ -134,6 +135,8 @@ public class List_Dashboard extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
+        Intent intent = new Intent(List_Dashboard.this, BridgeActivity.class);
+        startActivity(intent);
         finish();
     }
 }
