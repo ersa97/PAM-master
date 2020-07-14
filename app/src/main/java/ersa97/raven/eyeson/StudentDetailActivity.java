@@ -67,6 +67,7 @@ String namaDoc;
         textViewNama = findViewById(R.id.textView_Name);
         textViewDeskripsi= findViewById(R.id.textView_Deskripsi);
         imageViewPhoto = findViewById(R.id.img_photo);
+
         textViewNama.setText(nama);
         textViewDeskripsi.setText(deskripsi);
         textViewIzin.setText(izin);
