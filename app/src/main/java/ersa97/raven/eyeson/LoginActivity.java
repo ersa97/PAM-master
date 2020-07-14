@@ -62,6 +62,13 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void authLogin(){
+        String email_ = email.getText().toString();
+        String password_ = password.getText().toString();
+
+        if (email_.trim().isEmpty() || password_.trim().isEmpty()){
+            Toast.makeText(LoginActivity.this, "Email atau Password tidak boleh kosong", Toast.LENGTH_SHORT).show();
+            return;
+        }
         constraintloading.setVisibility(View.VISIBLE);
         mAuth.signInWithEmailAndPassword(email.getText().toString(), password.getText().toString())
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -103,7 +110,6 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        finish();
         System.exit(0);
     }
 }

@@ -23,7 +23,6 @@ public class AccountActivity extends AppCompatActivity {
 
     TextView textViewEmail;
     Button buttonLogOut;
-    TextView TextReset;
     FirebaseUser user;
     FirebaseAuth firebaseAuth;
     String email;
@@ -38,7 +37,6 @@ public class AccountActivity extends AppCompatActivity {
 
         textViewEmail = findViewById(R.id.emailSekarang);
         buttonLogOut = findViewById(R.id.Button_Logout);
-        TextReset = findViewById(R.id.Button_reset_password);
 
         email = user.getEmail();
         textViewEmail.setText(email);
@@ -53,32 +51,7 @@ public class AccountActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
-        TextReset.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                firebaseAuth.sendPasswordResetEmail(String.valueOf(textViewEmail))
-                        .addOnCompleteListener(new OnCompleteListener<Void>() {
-                            @Override
-                            public void onComplete(@NonNull Task<Void> task) {
-                                if(task.isSuccessful()){
-                                    Toast.makeText(AccountActivity.this,
-                                            "arahan untuk reset password telah dikirim ke email anda",
-                                            Toast.LENGTH_SHORT).show();
-                                    firebaseAuth.signOut();
-                                    finish();
-                                    System.exit(0);
-                                }
-                                else{
-                                    Toast.makeText(AccountActivity.this, "gagal untuk menreset password", Toast.LENGTH_SHORT).show();
-                                }
-            }
-        });
-
-    }
-
-});
-
+        
     }
 
     @Override

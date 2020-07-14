@@ -6,6 +6,19 @@
     android:layout_height="match_parent"
     tools:context=".BridgeActivity">
 
+    <TextView
+        android:id="@+id/title_bridge"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="SELAMAT DATANG"
+        android:textAlignment="center"
+        android:textColor="@color/button2"
+        android:textSize="35dp"
+        android:fontFamily="sans-serif-black"
+        android:layout_marginTop="30dp"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
     <Button
         android:id="@+id/izin_button"
         android:layout_width="125dp"
