@@ -19,6 +19,9 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -29,6 +32,9 @@ public class LoginActivity extends AppCompatActivity {
     Button log_in;
     private ConstraintLayout constraintloading;
 
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
+    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+    String pos,uidName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +65,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+
     }
 
     private void authLogin(){
@@ -85,6 +92,17 @@ public class LoginActivity extends AppCompatActivity {
                             Log.w("Failed", "signInWithEmail:failure", task.getException());
                             Toast.makeText(LoginActivity.this, "Authentication failed.",
                                     Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+
+        final String UserID = user.getUid().trim();
+        db.collection("User").whereEqualTo("Id",UserID).get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        for (DocumentSnapshot snapshot : task.getResult()){
+                            uidName = snapshot.get("Nama").toString();
                         }
                     }
                 });

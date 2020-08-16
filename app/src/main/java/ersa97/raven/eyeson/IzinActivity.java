@@ -14,7 +14,11 @@ import android.widget.Toast;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.Timestamp;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -22,8 +26,11 @@ import com.google.firebase.firestore.QuerySnapshot;
 import com.google.zxing.Result;
 
 import java.sql.Time;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.TimeZone;
 
 import me.dm7.barcodescanner.zxing.ZXingScannerView;
 
@@ -36,14 +43,17 @@ public class IzinActivity extends AppCompatActivity {
     EditText editTextAlasan;
     Button btnScan;
     Button btnIzin;
-    Button btnVerifMasuk;
-    Button btnVerifKeluar;
 
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
-    DocumentReference referenceStudent = db.collection("Student").document("izin");
+    DocumentReference referenceIDDocument = db.collection("Perizinan").document();
 
     public static final String ID = "id_student";
+
+    String namaUstad;
+    String IDdocument = referenceIDDocument.getId();
+    String Document;
 
 
 
@@ -58,8 +68,6 @@ public class IzinActivity extends AppCompatActivity {
         editTextMasuk = findViewById(R.id.tanggal_masuk);
         editTextAlasan = findViewById(R.id.alasan);
         btnIzin = findViewById(R.id.btn_izin_scan);
-        btnVerifKeluar = findViewById(R.id.btn_izin_verif_keluar);
-        btnVerifMasuk = findViewById(R.id.btn_izin_verif_masuk);
 
         if (!textViewId.equals(null)) {
             String id = getIntent().getStringExtra(ID);
@@ -98,6 +106,16 @@ public class IzinActivity extends AppCompatActivity {
                 Toast.makeText(IzinActivity.this, "santri tidak melakukan perizinan", Toast.LENGTH_SHORT).show();
             }
         });
+        final String UserID = user.getUid().trim();
+        db.collection("User").whereEqualTo("Id",UserID).get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        for (DocumentSnapshot snapshot : task.getResult()){
+                            namaUstad = snapshot.get("Nama").toString();
+                        }
+                    }
+                });
 
 
         btnIzin.setOnClickListener(new View.OnClickListener() {
@@ -108,6 +126,7 @@ public class IzinActivity extends AppCompatActivity {
                 String TimeKeluar = editTextKeluar.getText().toString();
                 String TimeMasuk = editTextMasuk.getText().toString();
                 String AlasanKeluar = editTextAlasan.getText().toString();
+                String Ustad = namaUstad;
 
                 if (Id.trim().isEmpty() || Name.trim().isEmpty() || TimeKeluar.isEmpty() || TimeMasuk.isEmpty() || AlasanKeluar.isEmpty()) {
                     Toast.makeText(IzinActivity.this, "harap lengkapi data yang masih kosong", Toast.LENGTH_SHORT).show();
@@ -115,17 +134,19 @@ public class IzinActivity extends AppCompatActivity {
                 }
 
                 Map<String, Object> objectMap = new HashMap<>();
+                objectMap.put("idDocument", IDdocument);
                 objectMap.put("id", Id);
                 objectMap.put("nama", Name);
                 objectMap.put("WaktuKeluar", TimeKeluar);
                 objectMap.put("WaktuMasuk", TimeMasuk);
                 objectMap.put("alasan", AlasanKeluar);
+                objectMap.put("ustad", Ustad);
 
-                db.collection("Perizinan")
-                        .add(objectMap)
-                        .addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
+                db.collection("Perizinan").document(IDdocument)
+                        .set(objectMap)
+                        .addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
-                            public void onComplete(@NonNull Task<DocumentReference> task) {
+                            public void onComplete(@NonNull Task<Void> task) {
                                 Toast.makeText(IzinActivity.this, "Izin berhasil", Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(IzinActivity.this, BridgeActivity.class);
                                 startActivity(intent);
@@ -135,57 +156,8 @@ public class IzinActivity extends AppCompatActivity {
             }
         });
 
-        btnVerifKeluar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String Id = textViewId.getText().toString();
-                String Name = textViewName.getText().toString();
-                String TimeKeluar = editTextKeluar.getText().toString();
-                String TimeMasuk = editTextMasuk.getText().toString();
-                String AlasanKeluar = editTextAlasan.getText().toString();
 
-                if (Id.trim().isEmpty() || Name.trim().isEmpty() || TimeKeluar.isEmpty() || TimeMasuk.isEmpty() || AlasanKeluar.isEmpty()) {
-                    Toast.makeText(IzinActivity.this, "ID dan Nama tidak boleh kosong", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                Map<String,Object> map = new HashMap<>();
-                map.put("izin","izin");
 
-                db.collection("Student").document(id)
-                        .update(map).addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        Toast.makeText(IzinActivity.this, "verifikasi berhasil", Toast.LENGTH_SHORT).show();
-                    }
-                });
-            }
-        });
-
-        btnVerifMasuk.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String Id = textViewId.getText().toString();
-                String Name = textViewName.getText().toString();
-                String TimeKeluar = editTextKeluar.getText().toString();
-                String TimeMasuk = editTextMasuk.getText().toString();
-                String AlasanKeluar = editTextAlasan.getText().toString();
-
-                if (Id.trim().isEmpty() || Name.trim().isEmpty() || TimeKeluar.isEmpty() || TimeMasuk.isEmpty() || AlasanKeluar.isEmpty()) {
-                    Toast.makeText(IzinActivity.this, "ID dan Nama tidak boleh kosong", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                Map<String,Object> map = new HashMap<>();
-                map.put("izin","tidak izin");
-
-                db.collection("Student").document(id)
-                        .update(map).addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        Toast.makeText(IzinActivity.this, "verifikasi berhasil", Toast.LENGTH_SHORT).show();
-                    }
-                });
-            }
-        });
     }
 
 

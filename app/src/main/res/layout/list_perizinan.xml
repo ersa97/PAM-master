@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:id="@+id/card_item"
+    app:cardBackgroundColor="@color/button2"
+    app:cardCornerRadius="15dp"
+    android:layout_margin="5dp">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="8dp"
+        android:layout_marginBottom="8dp">
+
+        <TextView
+            android:id="@+id/show_nama"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Nama"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:layout_alignParentTop="true"
+            android:textColorHint="@color/black"
+            android:textColor="@color/white"
+            android:textSize="20dp"
+            android:ellipsize="marquee"
+            android:singleLine="true"
+            android:textStyle="bold"
+            android:fontFamily="sans-serif"/>
+
+        <TextView
+            android:id="@+id/show_alamat"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="kelas"
+            android:maxLines="1"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textColorHint="@color/black"
+            android:textColor="@color/white"
+            android:textSize="14dp"
+            android:textStyle="bold"
+            android:fontFamily="sans-serif"
+            android:layout_below="@id/show_nama"
+            />
+
+        <TextView
+            android:id="@+id/ustad_pengizin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="ustad"
+            android:maxLines="1"
+            android:textAppearance="@style/Theme.AppCompat"
+            android:textColorHint="@color/black"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:textSize="14dp"
+            android:fontFamily="sans-serif"
+            android:layout_below="@id/show_alamat"
+            />
+
+        <TextView
+            android:id="@+id/waktu_keluar_izin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="waktu izin keluar"
+            android:maxLines="1"
+            android:textAppearance="@style/Theme.AppCompat"
+            android:textColorHint="@color/black"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:textSize="14dp"
+            android:fontFamily="sans-serif"
+            android:layout_below="@id/ustad_pengizin"
+            />
+
+        <TextView
+            android:id="@+id/waktu_masuk_izin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="waktu izin masuk"
+            android:maxLines="1"
+            android:textAppearance="@style/Theme.AppCompat"
+            android:textColorHint="@color/black"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:textSize="14dp"
+            android:fontFamily="sans-serif"
+            android:layout_below="@id/waktu_keluar_izin"
+            />
+
+        <TextView
+            android:id="@+id/waktu_keluar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="waktu keluar"
+            android:maxLines="1"
+            android:textAppearance="@style/Theme.AppCompat"
+            android:textColorHint="@color/black"
+            android:textColor="@color/red"
+            android:textStyle="bold"
+            android:textSize="18dp"
+            android:fontFamily="sans-serif"
+            android:layout_below="@id/waktu_masuk_izin"
+            />
+
+        <TextView
+            android:id="@+id/waktu_masuk"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="waktu masuk"
+            android:maxLines="1"
+            android:textAppearance="@style/Theme.AppCompat"
+            android:textColorHint="@color/black"
+            android:textColor="@color/red"
+            android:textStyle="bold"
+            android:textSize="18dp"
+            android:fontFamily="sans-serif"
+            android:layout_below="@id/waktu_keluar"
+            />
+
+    </RelativeLayout>
+</androidx.cardview.widget.CardView>

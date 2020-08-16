@@ -73,11 +73,13 @@ public class StudentsAdapter extends FirestoreRecyclerAdapter<Students, Students
                 @Override
                 public void onClick(View v) {
 
+                    String id = students.getId();
                     String nama = students.getNama();
                     String deskripsi = students.getDeskripsi();
                     String photo = students.getPhotoUrl();
                     String izin = students.getIzin();
                     Intent intent = new Intent(v.getContext(),StudentDetailActivity.class);
+                    intent.putExtra("id",id);
                     intent.putExtra("nama", nama);
                     intent.putExtra("usia", deskripsi);
                     intent.putExtra("photo", photo);

@@ -44,9 +44,11 @@ String namaDoc;
     TextView textViewDeskripsi;
     ImageView imageViewPhoto;
     TextView textViewIzin;
+    TextView textViewKelas;
     Bundle extra = new Bundle();
 
-    FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+
     //DocumentReference reference;
 
     @Override
@@ -56,17 +58,31 @@ String namaDoc;
 
         extra = getIntent().getExtras();
 
+       final String id = extra.getString("id");
         nama = extra.getString("nama");
         deskripsi = extra.getString("usia");
         photo = extra.getString("photo");
         izin = extra.getString("izin");
+
+        db.collection("Student").whereEqualTo("id",id).get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        for (DocumentSnapshot snapshot : task.getResult()){
+                            textViewKelas.setText(snapshot.get("alamat").toString());
+                        }
+                    }
+                });
 
 
 
         textViewIzin = findViewById(R.id.textView_Izin);
         textViewNama = findViewById(R.id.textView_Name);
         textViewDeskripsi= findViewById(R.id.textView_Deskripsi);
+        textViewKelas = findViewById(R.id.textView_class);
         imageViewPhoto = findViewById(R.id.img_photo);
+
+
 
         textViewNama.setText(nama);
         textViewDeskripsi.setText(deskripsi);
