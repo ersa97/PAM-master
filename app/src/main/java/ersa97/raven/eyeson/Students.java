@@ -1,39 +1,69 @@
 package ersa97.raven.eyeson;
 
 import com.google.firebase.Timestamp;
+import java.text.DateFormat;
+
 
 public class Students {
 
     String nama;
-    String alamat;
+    String kelas;
     String deskripsi;
     String photoUrl;
     String izin;
     String id;
+    String ustad;
     String alasankeluar;
-    String waktuizinkeluar;
-    String waktuizinmasuk;
-    Timestamp timestampKeluar;
-    Timestamp timestampMasuk;
+    String waktuKeluar;
+    String waktuMasuk;
+    Timestamp WaktuSignOut;
+    Timestamp WaktuSignIn;
 
-    public Students(String nama, String alamat, String deskripsi, String photoUrl, String izin, String id, String alasankeluar, String waktuizinkeluar, String waktuizinmasuk, Timestamp timestampKeluar, Timestamp timestampMasuk) {
-        this.nama = nama;
-        this.alamat = alamat;
-        this.deskripsi = deskripsi;
-        this.photoUrl = photoUrl;
-        this.izin = izin;
-        this.id = id;
-        this.alasankeluar = alasankeluar;
-        this.waktuizinkeluar = waktuizinkeluar;
-        this.waktuizinmasuk = waktuizinmasuk;
-        this.timestampKeluar = timestampKeluar;
-        this.timestampMasuk = timestampMasuk;
+
+
+    public Students(String nama, String kelas, String deskripsi, String photoUrl, String izin, String id, String ustad,String alasankeluar, String waktuKeluar, String waktuMasuk, DateFormat dateFormat, DateFormat dateFormat1) {
+
     }
 
 
     public Students(){
 
     }
+
+    public Students(String nama, String kelas, String deskripsi, String photoUrl, String izin, String id, String ustad, String alasankeluar, String waktuKeluar, String waktuMasuk, Timestamp waktuSignOut, Timestamp waktuSignIn) {
+        this.nama = nama;
+        this.kelas = kelas;
+        this.deskripsi = deskripsi;
+        this.photoUrl = photoUrl;
+        this.izin = izin;
+        this.id = id;
+        this.ustad = ustad;
+        this.alasankeluar = alasankeluar;
+        this.waktuKeluar = waktuKeluar;
+        this.waktuMasuk = waktuMasuk;
+        WaktuSignOut = waktuSignOut;
+        WaktuSignIn = waktuSignIn;
+    }
+
+
+
+    public Timestamp getWaktuSignOut() {
+        return WaktuSignOut;
+    }
+
+    public void setWaktuSignOut(Timestamp waktuSignOut) {
+        WaktuSignOut = waktuSignOut;
+    }
+
+    public Timestamp getWaktuSignIn() {
+        return WaktuSignIn;
+    }
+
+    public void setWaktuSignIn(Timestamp waktuSignIn) {
+        WaktuSignIn = waktuSignIn;
+    }
+
+
 
 
     public String getNama() {
@@ -44,14 +74,13 @@ public class Students {
         this.nama = nama;
     }
 
-    public String getAlamat() {
-        return alamat;
+    public String getKelas() {
+        return kelas;
     }
 
-    public void setAlamat(String alamat) {
-        this.alamat = alamat;
+    public void setKelas(String kelas) {
+        this.kelas = kelas;
     }
-
     public String getDeskripsi() {
         return deskripsi;
     }
@@ -84,6 +113,14 @@ public class Students {
         this.id = id;
     }
 
+    public String getUstad() {
+        return ustad;
+    }
+
+    public void setUstad(String ustad) {
+        this.ustad = ustad;
+    }
+
     public String getAlasankeluar() {
         return alasankeluar;
     }
@@ -92,40 +129,21 @@ public class Students {
         this.alasankeluar = alasankeluar;
     }
 
-    public String getWaktuizinkeluar() {
-        return waktuizinkeluar;
+    public String getWaktuKeluar() {
+        return waktuKeluar;
     }
 
-    public void setWaktuizinkeluar(String waktuizinkeluar) {
-        this.waktuizinkeluar = waktuizinkeluar;
+    public void setWaktuKeluar(String waktuKeluar) {
+        this.waktuKeluar = waktuKeluar;
     }
 
-    public String getWaktuizinmasuk() {
-        return waktuizinmasuk;
+    public String getWaktuMasuk() {
+        return waktuMasuk;
     }
 
-    public void setWaktuizinmasuk(String waktuizinmasuk) {
-        this.waktuizinmasuk = waktuizinmasuk;
+    public void setWaktuMasuk(String waktuMasuk) {
+        this.waktuMasuk = waktuMasuk;
     }
-
-    public Timestamp getTimestampKeluar() {
-        return timestampKeluar;
-    }
-
-    public void setTimestampKeluar(Timestamp timestampKeluar) {
-        this.timestampKeluar = timestampKeluar;
-    }
-
-    public Timestamp getTimestampMasuk() {
-        return timestampMasuk;
-    }
-
-    public void setTimestampMasuk(Timestamp timestampMasuk) {
-        this.timestampMasuk = timestampMasuk;
-    }
-
-
-
 
 
 }

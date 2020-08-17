@@ -24,6 +24,7 @@ public class BridgeActivity extends AppCompatActivity {
     Button btnList;
     Button btnIzin;
     Button btnKeamanan;
+    Button btnListIzin;
     TextView textViewNama;
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
@@ -42,9 +43,19 @@ public class BridgeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_bridge);
 
         btnList = findViewById(R.id.daftar_button);
+        btnListIzin = findViewById(R.id.list_button);
         btnIzin = findViewById(R.id.izin_button);
         textViewNama = findViewById(R.id.nama_user);
         btnKeamanan = findViewById(R.id.keamanan_button);
+
+        btnListIzin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), ListPerizinanActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
 
         btnKeamanan.setOnClickListener(new View.OnClickListener() {
             @Override

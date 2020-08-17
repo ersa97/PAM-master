@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,13 +7,70 @@
     tools:context=".ListPerizinanActivity"
     android:orientation="vertical"
     android:background="@color/grey">
+    <TextView
+        android:id="@+id/dari"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Dari"
+        android:textSize="15dp"
+        android:textColor="@color/black"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="@id/tanggaldari"
+        app:layout_constraintBottom_toBottomOf="@id/tanggaldari"
+        android:layout_margin="5dp"
+        />
+    <EditText
+        android:id="@+id/tanggaldari"
+        android:layout_width="125dp"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textSize="15dp"
+
+        android:textColor="@color/black"
+        app:layout_constraintLeft_toRightOf="@id/dari"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+    <TextView
+        android:id="@+id/sampai"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="sampai"
+        android:textSize="15dp"
+        android:textColor="@color/black"
+        app:layout_constraintLeft_toRightOf="@id/tanggaldari"
+        app:layout_constraintTop_toTopOf="@id/tanggaldari"
+        app:layout_constraintBottom_toBottomOf="@id/tanggaldari"
+        android:layout_margin="5dp"
+        />
+    <EditText
+        android:id="@+id/tanggalsampai"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textSize="15dp"
+        android:inputType="datetime"
+        android:textColor="@color/black"
+        app:layout_constraintLeft_toRightOf="@id/sampai"
+        app:layout_constraintRight_toLeftOf="@id/search"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+    <ImageButton
+        android:id="@+id/search"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@android:drawable/ic_menu_search"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/tanggalsampai"
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/main_list"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:padding="@dimen/activity_horizontal_margin"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        />
-
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tanggaldari"/>
+</androidx.constraintlayout.widget.ConstraintLayout>

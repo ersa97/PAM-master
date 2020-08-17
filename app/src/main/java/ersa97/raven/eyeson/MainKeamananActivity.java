@@ -37,6 +37,7 @@ public class MainKeamananActivity extends AppCompatActivity {
     TextView textViewKeluar;
     TextView textViewMasuk;
     TextView textViewAlasan;
+    TextView textViewKelas;
     Button btnScan;
     Button btnKeluar;
     Button btnMasuk;
@@ -66,6 +67,7 @@ public class MainKeamananActivity extends AppCompatActivity {
         btnScan = findViewById(R.id.btn_serial_number);
         btnKeluar = findViewById(R.id.btn_izin_verif_keluar);
         btnMasuk = findViewById(R.id.btn_izin_verif_masuk);
+        textViewKelas = findViewById(R.id.txt_kelas);
 
         if (!textViewId.equals(null)) {
             String id = getIntent().getStringExtra(ID);
@@ -91,6 +93,7 @@ public class MainKeamananActivity extends AppCompatActivity {
                         if (task.isSuccessful()){
                             for (DocumentSnapshot snapshot : task.getResult()){
                                 textViewName.setText(snapshot.get("nama").toString());
+                                textViewKelas.setText(snapshot.get("kelas").toString());
                             }
                         }
                     }
@@ -102,8 +105,8 @@ public class MainKeamananActivity extends AppCompatActivity {
                         if (task.isSuccessful()){
                             for (DocumentSnapshot documentSnapshot : task.getResult()){
                                 textViewIdDoc.setText(documentSnapshot.get("idDocument").toString());
-                                textViewKeluar.setText(documentSnapshot.get("WaktuKeluar").toString());
-                                textViewMasuk.setText(documentSnapshot.get("WaktuMasuk").toString());
+                                textViewKeluar.setText(documentSnapshot.get("waktuKeluar").toString());
+                                textViewMasuk.setText(documentSnapshot.get("waktuMasuk").toString());
                                 textViewAlasan.setText(documentSnapshot.get("alasan").toString());
                             }
                         }
@@ -130,7 +133,7 @@ public class MainKeamananActivity extends AppCompatActivity {
 
 
                 if (Id.trim().isEmpty() || Name.trim().isEmpty() || TimeKeluar.isEmpty() || TimeMasuk.isEmpty() || AlasanKeluar.isEmpty()) {
-                    Toast.makeText(MainKeamananActivity.this, "data tidak boleh kosong", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainKeamananActivity.this, "santri belum melakukan perizinan", Toast.LENGTH_SHORT).show();
                     return;
                 }
 

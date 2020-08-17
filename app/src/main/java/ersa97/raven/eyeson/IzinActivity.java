@@ -38,6 +38,7 @@ public class IzinActivity extends AppCompatActivity {
 
     TextView textViewId;
     TextView textViewName;
+    TextView textViewKelas;
     EditText editTextKeluar;
     EditText editTextMasuk;
     EditText editTextAlasan;
@@ -68,6 +69,7 @@ public class IzinActivity extends AppCompatActivity {
         editTextMasuk = findViewById(R.id.tanggal_masuk);
         editTextAlasan = findViewById(R.id.alasan);
         btnIzin = findViewById(R.id.btn_izin_scan);
+        textViewKelas = findViewById(R.id.txt_kelas);
 
         if (!textViewId.equals(null)) {
             String id = getIntent().getStringExtra(ID);
@@ -84,6 +86,8 @@ public class IzinActivity extends AppCompatActivity {
                         if (task.isSuccessful()){
                             for (DocumentSnapshot snapshot : task.getResult()){
                                 textViewName.setText(snapshot.get("nama").toString());
+                                textViewKelas.setText(snapshot.get("kelas").toString());
+
                             }
                         }
                     }
@@ -94,8 +98,8 @@ public class IzinActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()){
                             for (DocumentSnapshot documentSnapshot : task.getResult()){
-                                editTextKeluar.setText(documentSnapshot.get("WaktuKeluar").toString());
-                                editTextMasuk.setText(documentSnapshot.get("WaktuMasuk").toString());
+                                editTextKeluar.setText(documentSnapshot.get("waktuKeluar").toString());
+                                editTextMasuk.setText(documentSnapshot.get("waktuMasuk").toString());
                                 editTextAlasan.setText(documentSnapshot.get("alasan").toString());
                             }
                         }
@@ -123,6 +127,7 @@ public class IzinActivity extends AppCompatActivity {
             public void onClick(View view) {
                 String Id = textViewId.getText().toString();
                 String Name = textViewName.getText().toString();
+                String kelas = textViewKelas.getText().toString();
                 String TimeKeluar = editTextKeluar.getText().toString();
                 String TimeMasuk = editTextMasuk.getText().toString();
                 String AlasanKeluar = editTextAlasan.getText().toString();
@@ -137,10 +142,13 @@ public class IzinActivity extends AppCompatActivity {
                 objectMap.put("idDocument", IDdocument);
                 objectMap.put("id", Id);
                 objectMap.put("nama", Name);
-                objectMap.put("WaktuKeluar", TimeKeluar);
-                objectMap.put("WaktuMasuk", TimeMasuk);
+                objectMap.put("kelas",kelas);
+                objectMap.put("waktuKeluar", TimeKeluar);
+                objectMap.put("waktuMasuk", TimeMasuk);
                 objectMap.put("alasan", AlasanKeluar);
                 objectMap.put("ustad", Ustad);
+                objectMap.put("WaktuSignOut",null);
+                objectMap.put("WaktuSignIn",null);
 
                 db.collection("Perizinan").document(IDdocument)
                         .set(objectMap)

@@ -3,6 +3,8 @@ package ersa97.raven.eyeson;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -10,14 +12,17 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.firebase.firestore.FirebaseFirestore;
 
-public class ListIzinAdapter extends FirestoreRecyclerAdapter <Students, ListIzinAdapter.ListIzinHolder>{
-    /**
-     * Create a new RecyclerView adapter that listens to a Firestore Query.  See {@link
-     * FirestoreRecyclerOptions} for configuration options.
-     *
-     * @param options
-     */
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
+public class ListIzinAdapter extends FirestoreRecyclerAdapter <Students, ListIzinAdapter.ListIzinHolder> implements Filterable {
+
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
+
     public ListIzinAdapter(@NonNull FirestoreRecyclerOptions<Students> options) {
         super(options);
     }
@@ -26,6 +31,29 @@ public class ListIzinAdapter extends FirestoreRecyclerAdapter <Students, ListIzi
     protected void onBindViewHolder(@NonNull ListIzinHolder listIzinHolder, int i, @NonNull Students students) {
 
 
+        listIzinHolder.textViewNama.setText(students.getNama());
+        listIzinHolder.textViewUstad.setText(students.getUstad());
+        listIzinHolder.textViewKelas.setText(students.getKelas());
+        listIzinHolder.textViewWaktuIzinKeluar.setText(students.getWaktuKeluar());
+        listIzinHolder.textViewWaktuIzinMasuk.setText(students.getWaktuMasuk());
+
+        if (students.getWaktuSignOut() == null) {
+            listIzinHolder.textViewWaktuKeluar.setText("santri belum keluar");
+        }
+        if (students.getWaktuSignIn() == null) {
+            listIzinHolder.textViewWaktuMasuk.setText("santri belum kembali");
+        } else {
+            listIzinHolder.textViewWaktuKeluar.setText(students.getWaktuSignOut().toDate().toString());
+            listIzinHolder.textViewWaktuMasuk.setText(students.getWaktuSignIn().toDate().toString());
+
+            Date dateOut = students.getWaktuSignOut().toDate();
+            Date dateIn = students.getWaktuSignIn().toDate();
+
+            SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:MM:SS");
+
+            listIzinHolder.textViewWaktuKeluar.setText(formatter.format(dateOut));
+            listIzinHolder.textViewWaktuMasuk.setText(formatter.format(dateIn));
+        }
     }
 
     @NonNull
@@ -34,6 +62,21 @@ public class ListIzinAdapter extends FirestoreRecyclerAdapter <Students, ListIzi
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_perizinan,
                 parent, false);
         return new ListIzinHolder(view);
+    }
+
+    @Override
+    public Filter getFilter() {
+        return new Filter() {
+            @Override
+            protected FilterResults performFiltering(CharSequence charSequence) {
+                return null;
+            }
+
+            @Override
+            protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
+
+            }
+        };
     }
 
     class ListIzinHolder extends RecyclerView.ViewHolder{

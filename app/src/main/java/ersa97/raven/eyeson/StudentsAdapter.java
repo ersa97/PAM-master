@@ -67,7 +67,7 @@ public class StudentsAdapter extends FirestoreRecyclerAdapter<Students, Students
 
         public void bind(final Students students){
             textViewNama.setText(students.getNama());
-            textViewAlamat.setText(students.getAlamat());
+            textViewAlamat.setText(students.getKelas());
             textViewIzin.setText(students.getIzin());
             card_item.setOnClickListener(new View.OnClickListener() {
                 @Override
