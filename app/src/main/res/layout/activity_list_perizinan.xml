@@ -7,6 +7,9 @@
     tools:context=".ListPerizinanActivity"
     android:orientation="vertical"
     android:background="@color/grey">
+
+
+
     <TextView
         android:id="@+id/dari"
         android:layout_width="0dp"
@@ -24,8 +27,8 @@
         android:layout_width="125dp"
         android:layout_height="wrap_content"
         android:text=""
+        android:inputType="datetime"
         android:textSize="15dp"
-
         android:textColor="@color/black"
         app:layout_constraintLeft_toRightOf="@id/dari"
         app:layout_constraintTop_toTopOf="parent"
@@ -72,5 +75,5 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tanggaldari"/>
+        app:layout_constraintTop_toBottomOf="@id/tanggalsampai"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

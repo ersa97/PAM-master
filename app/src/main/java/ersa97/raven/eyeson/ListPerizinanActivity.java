@@ -6,6 +6,7 @@ import androidx.core.view.MenuItemCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.media.Image;
 import android.os.Bundle;
@@ -13,10 +14,12 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.SearchView;
 import android.widget.Toast;
+import android.widget.Toolbar;
 
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
@@ -30,8 +33,13 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
+
+import static java.util.Calendar.*;
 
 public class ListPerizinanActivity extends AppCompatActivity {
 
@@ -44,21 +52,22 @@ public class ListPerizinanActivity extends AppCompatActivity {
 
     ImageButton imageButtonSearch;
 
-    private ListIzinAdapter adapter;
+    Date dateDari;
+    Date dateSampai;
 
+
+    private ListIzinAdapter adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_perizinan);
 
+
+
+
         editTextFilterDari = findViewById(R.id.tanggaldari);
         editTextFilterSampai = findViewById(R.id.tanggalsampai);
         imageButtonSearch = findViewById(R.id.search);
-
-        final String filterDari = editTextFilterDari.getText().toString();
-        final String filterSampai = editTextFilterSampai.getText().toString();
-
-
 
         recyclerView = findViewById(R.id.main_list);
         recyclerView.setHasFixedSize(true);
@@ -70,10 +79,25 @@ public class ListPerizinanActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
 
-               Query query = activityRef.orderBy("nama", Query.Direction.DESCENDING)
-                       .startAt(filterDari).endAt(filterSampai);
+                String filterDari = editTextFilterDari.getText().toString();
+                String filterSampai = editTextFilterSampai.getText().toString();
+
+                Date dateDari = null;
+                Date dateSampai = null;
+                try {
+                    dateDari = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).parse(filterDari);
+                    dateSampai = new SimpleDateFormat("dd/MM/yyyy",Locale.getDefault()).parse(filterSampai);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+
+
+                Timestamp timestampDari = new Timestamp(dateDari);
+                Timestamp timestampSampai = new Timestamp(dateSampai);
+
+               Query query = activityRef.orderBy("WaktuSignOut", Query.Direction.DESCENDING)
+                       .startAt(timestampDari).endAt(timestampSampai);
 
                FirestoreRecyclerOptions<Students> options = new FirestoreRecyclerOptions.Builder<Students>()
                        .setQuery(query, Students.class)
@@ -85,6 +109,7 @@ public class ListPerizinanActivity extends AppCompatActivity {
         });
 
     }
+
     private void SetUpRecyclerView() {
         Query query = activityRef.orderBy("WaktuSignOut", Query.Direction.DESCENDING);
 

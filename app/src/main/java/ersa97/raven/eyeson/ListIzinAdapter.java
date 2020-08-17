@@ -1,5 +1,6 @@
 package ersa97.raven.eyeson;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,11 +18,10 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
-public class ListIzinAdapter extends FirestoreRecyclerAdapter <Students, ListIzinAdapter.ListIzinHolder> implements Filterable {
-
-    FirebaseFirestore db = FirebaseFirestore.getInstance();
+public class ListIzinAdapter extends FirestoreRecyclerAdapter <Students, ListIzinAdapter.ListIzinHolder>{
 
     public ListIzinAdapter(@NonNull FirestoreRecyclerOptions<Students> options) {
         super(options);
@@ -59,24 +59,10 @@ public class ListIzinAdapter extends FirestoreRecyclerAdapter <Students, ListIzi
     @NonNull
     @Override
     public ListIzinHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_perizinan,
                 parent, false);
         return new ListIzinHolder(view);
-    }
-
-    @Override
-    public Filter getFilter() {
-        return new Filter() {
-            @Override
-            protected FilterResults performFiltering(CharSequence charSequence) {
-                return null;
-            }
-
-            @Override
-            protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
-
-            }
-        };
     }
 
     class ListIzinHolder extends RecyclerView.ViewHolder{
