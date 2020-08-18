@@ -101,9 +101,9 @@ public class ListPerizinanActivity extends AppCompatActivity {
         imageButtonSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String filterDari = editTextFilterDari.getText().toString();
+/*              String filterDari = editTextFilterDari.getText().toString();
                 String filterSampai = editTextFilterSampai.getText().toString();
-/*
+
                 Date dateDari = null;
                 Date dateSampai = null;
                 try {
@@ -114,16 +114,17 @@ public class ListPerizinanActivity extends AppCompatActivity {
                 }
                 Timestamp timestampDari = new Timestamp(dateDari);
                 Timestamp timestampSampai = new Timestamp(dateSampai);
-*/
-                Query query = activityRef.orderBy("tanggalKeluar", Query.Direction.DESCENDING)
-                        .startAt(filterDari).endAt(filterSampai);
 
-                FirestoreRecyclerOptions<Students> options = new FirestoreRecyclerOptions.Builder<Students>()
+                Query query = activityRef.orderBy("WaktuSignOut", Query.Direction.DESCENDING);
+
+                FirestoreRecyclerOptions<Students> recyclerOptions = new FirestoreRecyclerOptions.Builder<Students>()
                         .setQuery(query, Students.class)
                         .build();
 
-                adapter = new ListIzinAdapter(options);
+                adapter = new ListIzinAdapter(recyclerOptions);
                 recyclerView.setAdapter(adapter);
+
+*/
             }
         });
 

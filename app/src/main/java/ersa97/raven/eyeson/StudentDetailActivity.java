@@ -69,7 +69,7 @@ String namaDoc;
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         for (DocumentSnapshot snapshot : task.getResult()){
-                            textViewKelas.setText(snapshot.get("alamat").toString());
+                            textViewKelas.setText(snapshot.get("kelas").toString());
                         }
                     }
                 });

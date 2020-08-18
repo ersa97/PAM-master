@@ -39,15 +39,6 @@ public class List_Dashboard extends AppCompatActivity {
 
     private StudentsAdapter adapter;
 
-
-    TextView textView;
-    String email;
-
-    Toolbar appBarLayout;
-    CollapsingToolbarLayout toolbarLayout;
-
-    FirebaseUser user;
-    FirebaseAuth firebaseAuth;
     RecyclerView recyclerView;
     private int ADD_STUDENT_CODE = 1;
 
@@ -56,18 +47,6 @@ public class List_Dashboard extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list__dashboard);
 
-
-        user = firebaseAuth.getInstance().getCurrentUser();
-        textView = findViewById(R.id.current_user);
-        toolbarLayout = findViewById(R.id.collapse_bar);
-
-        toolbarLayout.setTitle(email);
-
-        email = user.getEmail();
-        textView.setText(email);
-
-
-        appBarLayout = findViewById(R.id.top_toolbar);
 
 
 
@@ -99,7 +78,7 @@ public class List_Dashboard extends AppCompatActivity {
 
         recyclerView.setAdapter(adapter);
     }
-
+/*
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater menuInflater = getMenuInflater();
@@ -119,7 +98,7 @@ public class List_Dashboard extends AppCompatActivity {
         }
 
     }
-
+*/
     @Override
     protected void onStart() {
         super.onStart();
