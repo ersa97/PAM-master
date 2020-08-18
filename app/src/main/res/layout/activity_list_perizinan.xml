@@ -31,9 +31,9 @@
         android:editable="false"
         android:textSize="15dp"
         android:textColor="@color/black"
-        app:layout_constraintLeft_toRightOf="@id/dari"
-        app:layout_constraintRight_toLeftOf="@id/sampai"
+        app:layout_constraintLeft_toRightOf="@id/sampai"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/btn_datepicker"
         />
     <TextView
         android:id="@+id/sampai"
@@ -42,10 +42,11 @@
         android:text="Sampai"
         android:textSize="15dp"
         android:textColor="@color/black"
+        app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintLeft_toRightOf="@id/tanggaldari"
         app:layout_constraintRight_toLeftOf="@id/tanggalsampai"
-        app:layout_constraintTop_toTopOf="@id/tanggaldari"
-        app:layout_constraintBottom_toBottomOf="@id/tanggaldari"
+        app:layout_constraintTop_toTopOf="@id/tanggalsampai"
+        app:layout_constraintBottom_toBottomOf="@id/tanggalsampai"
         android:layout_margin="5dp"
         />
     <EditText
@@ -58,8 +59,8 @@
         android:textSize="15dp"
         android:textColor="@color/black"
         app:layout_constraintLeft_toRightOf="@id/sampai"
-        app:layout_constraintRight_toLeftOf="@id/search"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tanggaldari"
+        app:layout_constraintRight_toLeftOf="@id/btn_datepicker"
         />
     <ImageButton
         android:id="@+id/search"
@@ -67,8 +68,22 @@
         android:layout_height="wrap_content"
         android:src="@android:drawable/ic_menu_search"
         app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@id/btn_datepicker"
+        app:layout_constraintBottom_toBottomOf="@id/btn_datepicker"/>
+
+    <Button
+        android:id="@+id/btn_datepicker"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         app:layout_constraintLeft_toRightOf="@id/tanggalsampai"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="@id/tanggaldari"
+        app:layout_constraintBottom_toBottomOf="@id/tanggalsampai"
+        app:layout_constraintRight_toLeftOf="@id/search"
+        android:backgroundTint="@color/button2"
+        android:text="pilih tanggal"
+        android:textSize="10dp"
+        android:textColor="@color/colorPrimaryDark"
+        />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/main_list"

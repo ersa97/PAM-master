@@ -2,7 +2,9 @@ package ersa97.raven.eyeson;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.DialogFragment;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -11,6 +13,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.appeaser.sublimepickerlibrary.datepicker.SelectedDate;
+import com.appeaser.sublimepickerlibrary.helpers.SublimeOptions;
+import com.appeaser.sublimepickerlibrary.recurrencepicker.SublimeRecurrencePicker;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
@@ -46,6 +51,7 @@ public class IzinActivity extends AppCompatActivity {
     EditText editTexttanggalMasuk;
     Button btnScan;
     Button btnIzin;
+    Button datePicker;
 
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
@@ -54,9 +60,10 @@ public class IzinActivity extends AppCompatActivity {
 
     public static final String ID = "id_student";
 
-    String namaUstad;
+    String namaUstad, mDateStart, mDateEnd;
     String IDdocument = referenceIDDocument.getId();
     String Document;
+
 
 
 
@@ -74,6 +81,8 @@ public class IzinActivity extends AppCompatActivity {
         editTextAlasan = findViewById(R.id.alasan);
         btnIzin = findViewById(R.id.btn_izin_scan);
         textViewKelas = findViewById(R.id.txt_kelas);
+        datePicker = findViewById(R.id.btn_datepicker);
+
 
         if (!textViewId.equals(null)) {
             String id = getIntent().getStringExtra(ID);
@@ -127,6 +136,12 @@ public class IzinActivity extends AppCompatActivity {
                     }
                 });
 
+        datePicker.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openDateRangePicker();
+            }
+        });
 
         btnIzin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -176,6 +191,39 @@ public class IzinActivity extends AppCompatActivity {
 
 
 
+    }
+
+    public void openDateRangePicker(){
+        SublimePickerFragment pickerFragment = new SublimePickerFragment();
+        pickerFragment.setCallback(new SublimePickerFragment.Callback() {
+            @Override
+            public void onCancelled() {
+                Toast.makeText(IzinActivity.this, "user membatalkan", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onDateTimeRecurrenceSet(final SelectedDate selectedDate, int hourOfDay, int minute,
+                                                SublimeRecurrencePicker.RecurrenceOption recurrenceOption,
+                                                String recurrenceRule) {
+                SimpleDateFormat formatDate = new SimpleDateFormat("dd/MM/yyyy");
+                mDateStart = formatDate.format(selectedDate.getStartDate().getTime());
+                mDateEnd = formatDate.format(selectedDate.getEndDate().getTime());
+
+                editTexttanggalKeluar.setText(mDateStart);
+                editTexttanggalMasuk.setText(mDateEnd);
+            }
+        });
+
+        SublimeOptions options = new SublimeOptions();
+        options.setCanPickDateRange(true);
+        options.setPickerToShow(SublimeOptions.Picker.DATE_PICKER);
+
+        Bundle bundle = new Bundle();
+        bundle.putParcelable("SUBLIME_OPTIONS", options);
+        pickerFragment.setArguments(bundle);
+
+        pickerFragment.setStyle(DialogFragment.STYLE_NO_TITLE, 0);
+        pickerFragment.show(getSupportFragmentManager(),"SUBLIME_PICKER");
     }
 
 

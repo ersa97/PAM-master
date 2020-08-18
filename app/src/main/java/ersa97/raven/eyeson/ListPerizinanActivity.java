@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.MenuItemCompat;
+import androidx.fragment.app.DialogFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -16,6 +17,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -23,6 +25,9 @@ import android.widget.SearchView;
 import android.widget.Toast;
 import android.widget.Toolbar;
 
+import com.appeaser.sublimepickerlibrary.datepicker.SelectedDate;
+import com.appeaser.sublimepickerlibrary.helpers.SublimeOptions;
+import com.appeaser.sublimepickerlibrary.recurrencepicker.SublimeRecurrencePicker;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -57,8 +62,12 @@ public class ListPerizinanActivity extends AppCompatActivity {
 
     ImageButton imageButtonSearch;
 
+    Button buttonDatePicker;
+
     Date dateDari;
     Date dateSampai;
+
+    String mDateStart, mDateEnd;
 
 
     private ListIzinAdapter adapter;
@@ -73,6 +82,7 @@ public class ListPerizinanActivity extends AppCompatActivity {
         editTextFilterDari = findViewById(R.id.tanggaldari);
         editTextFilterSampai = findViewById(R.id.tanggalsampai);
         imageButtonSearch = findViewById(R.id.search);
+        buttonDatePicker = findViewById(R.id.btn_datepicker);
 
         recyclerView = findViewById(R.id.main_list);
         recyclerView.setHasFixedSize(true);
@@ -80,17 +90,11 @@ public class ListPerizinanActivity extends AppCompatActivity {
 
         SetUpRecyclerView();
 
-        editTextFilterDari.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showDateDialogDari();
-            }
-        });
 
-        editTextFilterSampai.setOnClickListener(new View.OnClickListener() {
+        buttonDatePicker.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                showDateDialogSampai();
+                showDateDialog();
             }
         });
 
@@ -125,63 +129,39 @@ public class ListPerizinanActivity extends AppCompatActivity {
 
     }
 
-    private void showDateDialogSampai() {
-        Calendar newCalendar = Calendar.getInstance();
-
-        datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
-
+    private void showDateDialog() {
+        SublimePickerFragment pickerFragment = new SublimePickerFragment();
+        pickerFragment.setCallback(new SublimePickerFragment.Callback() {
             @Override
-            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-
-                /**
-                 * Method ini dipanggil saat kita selesai memilih tanggal di DatePicker
-                 */
-
-                /**
-                 * Set Calendar untuk menampung tanggal yang dipilih
-                 */
-                Calendar newDate = Calendar.getInstance();
-                newDate.set(year, monthOfYear, dayOfMonth);
-
-                /**
-                 * Update TextView dengan tanggal yang kita pilih
-                 */
-                editTextFilterSampai.setText(dateFormatter.format(newDate.getTime()));
+            public void onCancelled() {
+                Toast.makeText(ListPerizinanActivity.this, "user membatalkan", Toast.LENGTH_SHORT).show();
             }
 
-        },newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
-
-        datePickerDialog.show();
-    }
-
-    private void showDateDialogDari(){
-        Calendar newCalendar = Calendar.getInstance();
-
-        datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
-
             @Override
-            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+            public void onDateTimeRecurrenceSet(final SelectedDate selectedDate, int hourOfDay, int minute,
+                                                SublimeRecurrencePicker.RecurrenceOption recurrenceOption,
+                                                String recurrenceRule) {
+                SimpleDateFormat formatDate = new SimpleDateFormat("dd/MM/yyyy");
+                mDateStart = formatDate.format(selectedDate.getStartDate().getTime());
+                mDateEnd = formatDate.format(selectedDate.getEndDate().getTime());
 
-                /**
-                 * Method ini dipanggil saat kita selesai memilih tanggal di DatePicker
-                 */
-
-                /**
-                 * Set Calendar untuk menampung tanggal yang dipilih
-                 */
-                Calendar newDate = Calendar.getInstance();
-                newDate.set(year, monthOfYear, dayOfMonth);
-
-                /**
-                 * Update TextView dengan tanggal yang kita pilih
-                 */
-                editTextFilterDari.setText(dateFormatter.format(newDate.getTime()));
+                editTextFilterDari.setText(mDateStart);
+                editTextFilterSampai.setText(mDateEnd);
             }
+        });
 
-        },newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
+        SublimeOptions options = new SublimeOptions();
+        options.setCanPickDateRange(true);
+        options.setPickerToShow(SublimeOptions.Picker.DATE_PICKER);
 
-        datePickerDialog.show();
+        Bundle bundle = new Bundle();
+        bundle.putParcelable("SUBLIME_OPTIONS", options);
+        pickerFragment.setArguments(bundle);
+
+        pickerFragment.setStyle(DialogFragment.STYLE_NO_TITLE, 0);
+        pickerFragment.show(getSupportFragmentManager(),"SUBLIME_PICKER");
     }
+
 
     private void SetUpRecyclerView() {
         Query query = activityRef.orderBy("WaktuSignOut", Query.Direction.DESCENDING);
