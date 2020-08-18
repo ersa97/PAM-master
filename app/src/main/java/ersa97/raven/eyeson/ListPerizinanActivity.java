@@ -1,6 +1,7 @@
 package ersa97.raven.eyeson;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.MenuItemCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -9,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.media.Image;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -47,6 +49,9 @@ public class ListPerizinanActivity extends AppCompatActivity {
     private CollectionReference activityRef = db.collection("Perizinan");
     RecyclerView recyclerView;
 
+    private DatePickerDialog datePickerDialog;
+    private SimpleDateFormat dateFormatter;
+
     EditText editTextFilterDari;
     EditText editTextFilterSampai;
 
@@ -62,7 +67,7 @@ public class ListPerizinanActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_perizinan);
 
-
+        dateFormatter = new SimpleDateFormat("dd-MM-yyyy", Locale.US);
 
 
         editTextFilterDari = findViewById(R.id.tanggaldari);
@@ -75,14 +80,26 @@ public class ListPerizinanActivity extends AppCompatActivity {
 
         SetUpRecyclerView();
 
+        editTextFilterDari.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showDateDialogDari();
+            }
+        });
+
+        editTextFilterSampai.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showDateDialogSampai();
+            }
+        });
+
         imageButtonSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String filterDari = editTextFilterDari.getText().toString();
                 String filterSampai = editTextFilterSampai.getText().toString();
 /*
-
-
                 Date dateDari = null;
                 Date dateSampai = null;
                 try {
@@ -91,23 +108,79 @@ public class ListPerizinanActivity extends AppCompatActivity {
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
-
-
                 Timestamp timestampDari = new Timestamp(dateDari);
                 Timestamp timestampSampai = new Timestamp(dateSampai);
 */
-               Query query = activityRef.orderBy("tanggalKeluar", Query.Direction.DESCENDING)
-                       .startAt(filterDari).endAt(filterDari);
+                Query query = activityRef.orderBy("tanggalKeluar", Query.Direction.DESCENDING)
+                        .startAt(filterDari).endAt(filterSampai);
 
-               FirestoreRecyclerOptions<Students> options = new FirestoreRecyclerOptions.Builder<Students>()
-                       .setQuery(query, Students.class)
-                       .build();
+                FirestoreRecyclerOptions<Students> options = new FirestoreRecyclerOptions.Builder<Students>()
+                        .setQuery(query, Students.class)
+                        .build();
 
-               adapter = new ListIzinAdapter(options);
-               recyclerView.setAdapter(adapter);
+                adapter = new ListIzinAdapter(options);
+                recyclerView.setAdapter(adapter);
             }
         });
 
+    }
+
+    private void showDateDialogSampai() {
+        Calendar newCalendar = Calendar.getInstance();
+
+        datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
+
+            @Override
+            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+
+                /**
+                 * Method ini dipanggil saat kita selesai memilih tanggal di DatePicker
+                 */
+
+                /**
+                 * Set Calendar untuk menampung tanggal yang dipilih
+                 */
+                Calendar newDate = Calendar.getInstance();
+                newDate.set(year, monthOfYear, dayOfMonth);
+
+                /**
+                 * Update TextView dengan tanggal yang kita pilih
+                 */
+                editTextFilterSampai.setText(dateFormatter.format(newDate.getTime()));
+            }
+
+        },newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
+
+        datePickerDialog.show();
+    }
+
+    private void showDateDialogDari(){
+        Calendar newCalendar = Calendar.getInstance();
+
+        datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
+
+            @Override
+            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+
+                /**
+                 * Method ini dipanggil saat kita selesai memilih tanggal di DatePicker
+                 */
+
+                /**
+                 * Set Calendar untuk menampung tanggal yang dipilih
+                 */
+                Calendar newDate = Calendar.getInstance();
+                newDate.set(year, monthOfYear, dayOfMonth);
+
+                /**
+                 * Update TextView dengan tanggal yang kita pilih
+                 */
+                editTextFilterDari.setText(dateFormatter.format(newDate.getTime()));
+            }
+
+        },newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
+
+        datePickerDialog.show();
     }
 
     private void SetUpRecyclerView() {

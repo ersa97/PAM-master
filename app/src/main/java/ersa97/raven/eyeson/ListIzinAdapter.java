@@ -17,15 +17,22 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
 public class ListIzinAdapter extends FirestoreRecyclerAdapter <Students, ListIzinAdapter.ListIzinHolder>{
 
+    private Context context1;
+    private ArrayList<Students> studentsArrayList;
+    private Context context;
+
+
     public ListIzinAdapter(@NonNull FirestoreRecyclerOptions<Students> options) {
         super(options);
     }
+
 
     @Override
     protected void onBindViewHolder(@NonNull ListIzinHolder listIzinHolder, int i, @NonNull Students students) {
