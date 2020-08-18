@@ -42,6 +42,8 @@ public class IzinActivity extends AppCompatActivity {
     EditText editTextKeluar;
     EditText editTextMasuk;
     EditText editTextAlasan;
+    EditText editTexttanggalKeluar;
+    EditText editTexttanggalMasuk;
     Button btnScan;
     Button btnIzin;
 
@@ -65,8 +67,10 @@ public class IzinActivity extends AppCompatActivity {
 
         textViewId = findViewById(R.id.txt_id);
         textViewName = findViewById(R.id.student_name);
-        editTextKeluar = findViewById(R.id.tanggal_keluar);
-        editTextMasuk = findViewById(R.id.tanggal_masuk);
+        editTextKeluar = findViewById(R.id.waktu_izin_ustad_keluar);
+        editTextMasuk = findViewById(R.id.waktu_izin_ustad_masuk);
+        editTexttanggalKeluar = findViewById(R.id.tanggal_keluar);
+        editTexttanggalMasuk = findViewById(R.id.tanggal_masuk);
         editTextAlasan = findViewById(R.id.alasan);
         btnIzin = findViewById(R.id.btn_izin_scan);
         textViewKelas = findViewById(R.id.txt_kelas);
@@ -100,6 +104,8 @@ public class IzinActivity extends AppCompatActivity {
                             for (DocumentSnapshot documentSnapshot : task.getResult()){
                                 editTextKeluar.setText(documentSnapshot.get("waktuKeluar").toString());
                                 editTextMasuk.setText(documentSnapshot.get("waktuMasuk").toString());
+                                editTexttanggalKeluar.setText(documentSnapshot.get("tanggalMasuk").toString());
+                                editTexttanggalMasuk.setText(documentSnapshot.get("tanggalKeluar").toString());
                                 editTextAlasan.setText(documentSnapshot.get("alasan").toString());
                             }
                         }
@@ -130,10 +136,12 @@ public class IzinActivity extends AppCompatActivity {
                 String kelas = textViewKelas.getText().toString();
                 String TimeKeluar = editTextKeluar.getText().toString();
                 String TimeMasuk = editTextMasuk.getText().toString();
+                String DateKeluar = editTexttanggalKeluar.getText().toString();
+                String DateMasuk = editTexttanggalMasuk.getText().toString();
                 String AlasanKeluar = editTextAlasan.getText().toString();
                 String Ustad = namaUstad;
 
-                if (Id.trim().isEmpty() || Name.trim().isEmpty() || TimeKeluar.isEmpty() || TimeMasuk.isEmpty() || AlasanKeluar.isEmpty()) {
+                if (Id.trim().isEmpty() || Name.trim().isEmpty() || TimeKeluar.isEmpty() || TimeMasuk.isEmpty() || AlasanKeluar.isEmpty() || DateKeluar.isEmpty()||DateMasuk.isEmpty()) {
                     Toast.makeText(IzinActivity.this, "harap lengkapi data yang masih kosong", Toast.LENGTH_SHORT).show();
                     return;
                 }
@@ -145,6 +153,8 @@ public class IzinActivity extends AppCompatActivity {
                 objectMap.put("kelas",kelas);
                 objectMap.put("waktuKeluar", TimeKeluar);
                 objectMap.put("waktuMasuk", TimeMasuk);
+                objectMap.put("tanggalKeluar", DateKeluar);
+                objectMap.put("tanggalMasuk", DateMasuk);
                 objectMap.put("alasan", AlasanKeluar);
                 objectMap.put("ustad", Ustad);
                 objectMap.put("WaktuSignOut",null);

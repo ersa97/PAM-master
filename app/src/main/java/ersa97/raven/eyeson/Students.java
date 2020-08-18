@@ -8,6 +8,9 @@ public class Students {
 
     String nama;
     String kelas;
+
+
+
     String deskripsi;
     String photoUrl;
     String izin;
@@ -16,21 +19,22 @@ public class Students {
     String alasankeluar;
     String waktuKeluar;
     String waktuMasuk;
+    String tanggalKeluar;
+    String tanggalMasuk;
     Timestamp WaktuSignOut;
     Timestamp WaktuSignIn;
 
 
-
-    public Students(String nama, String kelas, String deskripsi, String photoUrl, String izin, String id, String ustad,String alasankeluar, String waktuKeluar, String waktuMasuk, DateFormat dateFormat, DateFormat dateFormat1) {
-
-    }
-
-
-    public Students(){
+    public Students(String nama, String kelas, String deskripsi, String photoUrl, String izin, String id, String ustad, String alasankeluar, String waktuKeluar, String waktuMasuk, String tanggalKeluar, String tanggalMasuk, DateFormat dateFormat, DateFormat dateFormat1) {
 
     }
 
-    public Students(String nama, String kelas, String deskripsi, String photoUrl, String izin, String id, String ustad, String alasankeluar, String waktuKeluar, String waktuMasuk, Timestamp waktuSignOut, Timestamp waktuSignIn) {
+
+    public Students() {
+
+    }
+
+    public Students(String nama, String kelas, String deskripsi, String photoUrl, String izin, String id, String ustad, String alasankeluar, String waktuKeluar, String waktuMasuk, String tanggalKeluar, String tanggalMasuk, Timestamp waktuSignOut, Timestamp waktuSignIn) {
         this.nama = nama;
         this.kelas = kelas;
         this.deskripsi = deskripsi;
@@ -41,30 +45,11 @@ public class Students {
         this.alasankeluar = alasankeluar;
         this.waktuKeluar = waktuKeluar;
         this.waktuMasuk = waktuMasuk;
+        this.tanggalKeluar = tanggalKeluar;
+        this.tanggalMasuk = tanggalMasuk;
         WaktuSignOut = waktuSignOut;
         WaktuSignIn = waktuSignIn;
     }
-
-
-
-    public Timestamp getWaktuSignOut() {
-        return WaktuSignOut;
-    }
-
-    public void setWaktuSignOut(Timestamp waktuSignOut) {
-        WaktuSignOut = waktuSignOut;
-    }
-
-    public Timestamp getWaktuSignIn() {
-        return WaktuSignIn;
-    }
-
-    public void setWaktuSignIn(Timestamp waktuSignIn) {
-        WaktuSignIn = waktuSignIn;
-    }
-
-
-
 
     public String getNama() {
         return nama;
@@ -81,6 +66,7 @@ public class Students {
     public void setKelas(String kelas) {
         this.kelas = kelas;
     }
+
     public String getDeskripsi() {
         return deskripsi;
     }
@@ -145,5 +131,35 @@ public class Students {
         this.waktuMasuk = waktuMasuk;
     }
 
+    public String getTanggalKeluar() {
+        return tanggalKeluar;
+    }
 
+    public void setTanggalKeluar(String tanggalKeluar) {
+        this.tanggalKeluar = tanggalKeluar;
+    }
+
+    public String getTanggalMasuk() {
+        return tanggalMasuk;
+    }
+
+    public void setTanggalMasuk(String tanggalMasuk) {
+        this.tanggalMasuk = tanggalMasuk;
+    }
+
+    public Timestamp getWaktuSignOut() {
+        return WaktuSignOut;
+    }
+
+    public void setWaktuSignOut(Timestamp waktuSignOut) {
+        WaktuSignOut = waktuSignOut;
+    }
+
+    public Timestamp getWaktuSignIn() {
+        return WaktuSignIn;
+    }
+
+    public void setWaktuSignIn(Timestamp waktuSignIn) {
+        WaktuSignIn = waktuSignIn;
+    }
 }

@@ -85,26 +85,51 @@
 
     <TextView
         android:id="@+id/tanggal_keluar"
-        android:layout_width="0dp"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
         app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/txt_kelas"
+        android:layout_margin="35dp"
+        android:hint="tanggal keluar"
+        android:inputType="text"
+        android:textSize="20dp"
+        />
+
+
+    <TextView
+        android:id="@+id/waktu_izin_ustad_keluar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toRightOf="@id/tanggal_keluar"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/txt_kelas"
         android:layout_margin="35dp"
-        android:hint="Waktu Keluar"
+        android:hint="Jam"
         android:inputType="text"
         android:textSize="20dp"
         />
 
     <TextView
         android:id="@+id/tanggal_masuk"
-        android:layout_width="0dp"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
         app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tanggal_keluar"
+        android:layout_margin="35dp"
+        android:hint="tanggal keluar"
+        android:inputType="text"
+        android:textSize="20dp"
+        />
+
+    <TextView
+        android:id="@+id/waktu_izin_ustad_masuk"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toRightOf="@id/tanggal_masuk"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tanggal_keluar"
         android:layout_margin="35dp"
-        android:hint="Waktu Masuk"
+        android:hint="Jam"
         android:inputType="text"
         android:textSize="20dp"
         />

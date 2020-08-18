@@ -36,6 +36,8 @@ public class MainKeamananActivity extends AppCompatActivity {
     TextView textViewName;
     TextView textViewKeluar;
     TextView textViewMasuk;
+    TextView textViewTanggalKeluar;
+    TextView textViewTanggalMasuk;
     TextView textViewAlasan;
     TextView textViewKelas;
     Button btnScan;
@@ -61,8 +63,10 @@ public class MainKeamananActivity extends AppCompatActivity {
         textViewId = findViewById(R.id.txt_id);
         textViewIdDoc = findViewById(R.id.txt_id_doc);
         textViewName = findViewById(R.id.student_name);
-        textViewKeluar = findViewById(R.id.tanggal_keluar);
-        textViewMasuk = findViewById(R.id.tanggal_masuk);
+        textViewKeluar = findViewById(R.id.waktu_izin_ustad_keluar);
+        textViewMasuk = findViewById(R.id.waktu_izin_ustad_masuk);
+        textViewTanggalKeluar = findViewById(R.id.tanggal_masuk);
+        textViewTanggalMasuk = findViewById(R.id.tanggal_keluar);
         textViewAlasan = findViewById(R.id.alasan);
         btnScan = findViewById(R.id.btn_serial_number);
         btnKeluar = findViewById(R.id.btn_izin_verif_keluar);
@@ -107,6 +111,8 @@ public class MainKeamananActivity extends AppCompatActivity {
                                 textViewIdDoc.setText(documentSnapshot.get("idDocument").toString());
                                 textViewKeluar.setText(documentSnapshot.get("waktuKeluar").toString());
                                 textViewMasuk.setText(documentSnapshot.get("waktuMasuk").toString());
+                                textViewTanggalKeluar.setText(documentSnapshot.get("tanggalKeluar").toString());
+                                textViewTanggalMasuk.setText(documentSnapshot.get("tanggalMasuk").toString());
                                 textViewAlasan.setText(documentSnapshot.get("alasan").toString());
                             }
                         }
@@ -127,12 +133,14 @@ public class MainKeamananActivity extends AppCompatActivity {
                 String Name = textViewName.getText().toString();
                 String TimeKeluar = textViewKeluar.getText().toString();
                 String TimeMasuk = textViewMasuk.getText().toString();
+                String DateKeluar = textViewTanggalKeluar.getText().toString();
+                String DateMasuk = textViewTanggalMasuk.getText().toString();
                 String AlasanKeluar = textViewAlasan.getText().toString();
                 SimpleDateFormat dateFormatKeluar = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm:ssz");
                 dateFormatKeluar.setTimeZone(TimeZone.getTimeZone("GMT"));
 
 
-                if (Id.trim().isEmpty() || Name.trim().isEmpty() || TimeKeluar.isEmpty() || TimeMasuk.isEmpty() || AlasanKeluar.isEmpty()) {
+                if (Id.trim().isEmpty() || Name.trim().isEmpty() || TimeKeluar.isEmpty() || TimeMasuk.isEmpty() || AlasanKeluar.isEmpty()||DateKeluar.isEmpty()||DateMasuk.isEmpty()) {
                     Toast.makeText(MainKeamananActivity.this, "santri belum melakukan perizinan", Toast.LENGTH_SHORT).show();
                     return;
                 }

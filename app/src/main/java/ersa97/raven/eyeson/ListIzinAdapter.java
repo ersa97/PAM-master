@@ -36,6 +36,8 @@ public class ListIzinAdapter extends FirestoreRecyclerAdapter <Students, ListIzi
         listIzinHolder.textViewKelas.setText(students.getKelas());
         listIzinHolder.textViewWaktuIzinKeluar.setText(students.getWaktuKeluar());
         listIzinHolder.textViewWaktuIzinMasuk.setText(students.getWaktuMasuk());
+        listIzinHolder.textViewTanggalKeluar.setText(students.getTanggalKeluar());
+        listIzinHolder.textViewTanggalMasuk.setText(students.getTanggalMasuk());
 
         if (students.getWaktuSignOut() == null) {
             listIzinHolder.textViewWaktuKeluar.setText("santri belum keluar");
@@ -72,6 +74,8 @@ public class ListIzinAdapter extends FirestoreRecyclerAdapter <Students, ListIzi
         TextView textViewUstad;
         TextView textViewWaktuIzinKeluar;
         TextView textViewWaktuIzinMasuk;
+        TextView textViewTanggalKeluar;
+        TextView textViewTanggalMasuk;
         TextView textViewWaktuKeluar;
         TextView textViewWaktuMasuk;
 
@@ -83,6 +87,8 @@ public class ListIzinAdapter extends FirestoreRecyclerAdapter <Students, ListIzi
             textViewUstad = itemView.findViewById(R.id.ustad_pengizin);
             textViewWaktuIzinKeluar = itemView.findViewById(R.id.waktu_keluar_izin);
             textViewWaktuIzinMasuk = itemView.findViewById(R.id.waktu_masuk_izin);
+            textViewTanggalKeluar = itemView.findViewById(R.id.tanggal_keluar_izin);
+            textViewTanggalMasuk = itemView.findViewById(R.id.tanggal_masuk_izin);
             textViewWaktuKeluar = itemView.findViewById(R.id.waktu_keluar);
             textViewWaktuMasuk = itemView.findViewById(R.id.waktu_masuk);
         }

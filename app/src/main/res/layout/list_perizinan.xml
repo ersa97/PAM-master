@@ -60,6 +60,47 @@
             />
 
         <TextView
+            android:id="@+id/tgl"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="keluar"
+            android:textColor="@color/black"
+            android:textSize="14dp"
+            android:textStyle="bold"
+            android:fontFamily="sans-serif"
+            android:layout_below="@id/ustad_pengizin"
+            android:layout_marginEnd="5dp"/>
+
+        <TextView
+            android:id="@+id/tanggal_keluar_izin"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:text="tanggal izin keluar"
+            android:maxLines="1"
+            android:textAppearance="@style/Theme.AppCompat"
+            android:textColorHint="@color/black"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:textSize="14dp"
+            android:fontFamily="sans-serif"
+            android:layout_below="@id/ustad_pengizin"
+            android:layout_toEndOf="@id/tgl"
+            />
+
+        <TextView
+            android:id="@+id/jam"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="dari "
+            android:textColor="@color/black"
+            android:textSize="14dp"
+            android:textStyle="bold"
+            android:fontFamily="sans-serif"
+            android:layout_below="@id/ustad_pengizin"
+            android:layout_toEndOf="@id/tanggal_keluar_izin"
+            android:layout_marginEnd="5dp"/>
+
+        <TextView
             android:id="@+id/waktu_keluar_izin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -72,6 +113,35 @@
             android:textSize="14dp"
             android:fontFamily="sans-serif"
             android:layout_below="@id/ustad_pengizin"
+            android:layout_toEndOf="@id/jam"
+            />
+
+        <TextView
+            android:id="@+id/tgl1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="masuk"
+            android:textColor="@color/black"
+            android:textSize="14dp"
+            android:textStyle="bold"
+            android:fontFamily="sans-serif"
+            android:layout_below="@id/waktu_keluar_izin"
+            android:layout_marginEnd="5dp"/>
+
+        <TextView
+            android:id="@+id/tanggal_masuk_izin"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:text="tanggal izin masuk"
+            android:maxLines="1"
+            android:textAppearance="@style/Theme.AppCompat"
+            android:textColorHint="@color/black"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:textSize="14dp"
+            android:fontFamily="sans-serif"
+            android:layout_below="@id/waktu_keluar_izin"
+            android:layout_toEndOf="@id/tgl"
             />
 
         <TextView
@@ -87,11 +157,39 @@
             android:textSize="14dp"
             android:fontFamily="sans-serif"
             android:layout_below="@id/waktu_keluar_izin"
+            android:layout_toEndOf="@id/jam1"
             />
 
         <TextView
+            android:id="@+id/jam1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="sampai"
+            android:textColor="@color/black"
+            android:textSize="14dp"
+            android:textStyle="bold"
+            android:fontFamily="sans-serif"
+            android:layout_below="@id/waktu_keluar_izin"
+            android:layout_toEndOf="@id/tanggal_masuk_izin"
+            android:layout_marginEnd="5dp"/>
+
+
+
+        <TextView
+            android:id="@+id/waktu1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="waktu keluar"
+            android:textColor="@color/black"
+            android:textSize="14dp"
+            android:textStyle="bold"
+            android:fontFamily="sans-serif"
+            android:layout_below="@id/waktu_masuk_izin"
+            android:layout_marginEnd="5dp"/>
+
+        <TextView
             android:id="@+id/waktu_keluar"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="waktu keluar"
             android:maxLines="1"
@@ -99,14 +197,28 @@
             android:textColorHint="@color/black"
             android:textColor="@color/red"
             android:textStyle="bold"
-            android:textSize="18dp"
+            android:textSize="14dp"
             android:fontFamily="sans-serif"
             android:layout_below="@id/waktu_masuk_izin"
+            android:layout_toEndOf="@id/waktu1"
+            android:layout_alignParentEnd="true"
             />
 
         <TextView
+            android:id="@+id/waktu2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="waktu masuk"
+            android:textColor="@color/black"
+            android:textSize="14dp"
+            android:textStyle="bold"
+            android:fontFamily="sans-serif"
+            android:layout_below="@id/waktu_keluar"
+            android:layout_marginEnd="5dp"/>
+
+        <TextView
             android:id="@+id/waktu_masuk"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="waktu masuk"
             android:maxLines="1"
@@ -114,9 +226,11 @@
             android:textColorHint="@color/black"
             android:textColor="@color/red"
             android:textStyle="bold"
-            android:textSize="18dp"
+            android:textSize="14dp"
             android:fontFamily="sans-serif"
             android:layout_below="@id/waktu_keluar"
+            android:layout_toEndOf="@id/waktu2"
+            android:layout_alignParentEnd="true"
             />
 
     </RelativeLayout>
