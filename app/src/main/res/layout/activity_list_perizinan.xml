@@ -22,19 +22,20 @@
         app:layout_constraintBottom_toBottomOf="@id/tanggaldari"
         android:layout_margin="5dp"
         />
+
     <EditText
         android:id="@+id/tanggaldari"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="216dp"
+        android:editable="false"
         android:text="pilih tanggal"
         android:textAlignment="center"
-        android:editable="false"
-        android:textSize="15dp"
         android:textColor="@color/black"
+        android:textSize="15dp"
+        app:layout_constraintEnd_toStartOf="@+id/search"
         app:layout_constraintLeft_toRightOf="@id/sampai"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintRight_toLeftOf="@id/btn_datepicker"
-        />
+        app:layout_constraintTop_toTopOf="parent" />
     <TextView
         android:id="@+id/sampai"
         android:layout_width="wrap_content"
@@ -49,41 +50,30 @@
         app:layout_constraintBottom_toBottomOf="@id/tanggalsampai"
         android:layout_margin="5dp"
         />
+
     <EditText
         android:id="@+id/tanggalsampai"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="214dp"
+        android:editable="false"
         android:text="pilih tanggal"
         android:textAlignment="center"
-        android:editable="false"
-        android:textSize="15dp"
         android:textColor="@color/black"
+        android:textSize="15dp"
+        app:layout_constraintEnd_toStartOf="@+id/search"
         app:layout_constraintLeft_toRightOf="@id/sampai"
-        app:layout_constraintTop_toBottomOf="@id/tanggaldari"
-        app:layout_constraintRight_toLeftOf="@id/btn_datepicker"
-        />
+        app:layout_constraintTop_toBottomOf="@id/tanggaldari" />
+
     <ImageButton
         android:id="@+id/search"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="31dp"
         android:src="@android:drawable/ic_menu_search"
+        app:layout_constraintBottom_toBottomOf="@+id/tanggalsampai"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="@id/btn_datepicker"
-        app:layout_constraintBottom_toBottomOf="@id/btn_datepicker"/>
-
-    <Button
-        android:id="@+id/btn_datepicker"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintLeft_toRightOf="@id/tanggalsampai"
-        app:layout_constraintTop_toTopOf="@id/tanggaldari"
-        app:layout_constraintBottom_toBottomOf="@id/tanggalsampai"
-        app:layout_constraintRight_toLeftOf="@id/search"
-        android:backgroundTint="@color/button2"
-        android:text="pilih tanggal"
-        android:textSize="10dp"
-        android:textColor="@color/colorPrimaryDark"
-        />
+        app:layout_constraintTop_toTopOf="@+id/tanggaldari" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/main_list"
